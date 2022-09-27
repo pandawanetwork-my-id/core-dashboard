@@ -1,0 +1,29 @@
+<main-layout>
+    <header-app if="{ auth }" data="{ data }"></header-app>
+    <menu-app if="{ auth }" active="{ module }" cb="{ setActive }"></menu-app>
+    <div id="app-layout" is="{ module }" data="{ data }"></div>
+    <body-footer if="{ auth }"></body-footer>
+    <script>
+        import { getStorage } from 'helpers/storage'
+        import { logInfo, setFavicon } from 'helpers/utilities'
+        import NonLoginFavicon from 'theme/images/non-login-favicon.png'
+
+        export default {
+            onBeforeMount() {
+                this.module = null
+                this.auth = null
+                this.data = { username: getStorage('USERNAME') }
+            },
+            setModuleActive(mdl, auth, data) {
+                this.module = mdl
+                this.auth = auth
+                this.data = data
+                logInfo('Set Module Active:', mdl)
+                this.update()
+                if (this.auth) setFavicon(NonLoginFavicon)
+            },
+            setActive(a) {
+            }
+        }
+    </script>
+</main-layout>

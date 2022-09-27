@@ -1,0 +1,27 @@
+<menuapp>
+    <div class="br-sideleft sideleft-scrollbar ps ps--active-y">
+        <ul class="br-sideleft-menu mg-t-30">
+            <li each="{o in this.menuItems}" class="br-menu-item">
+                <a if="{ !o.childs }" href="{setLink(o.link,{})}" class="br-menu-link { ActiveClass(props.active, o.name) } tx-11" id="{o.name}">
+                    <font-awesome icon="menu-item-icon icon tx-24 {o.icon}"></font-awesome>
+                    <span class="menu-item-label tx-10">{o.title}</span>
+                </a>
+                <a if="{ o.childs }" onclick="{() => toggleSettings(o)}" ref="{ o.name }" class="br-menu-link with-sub pointer { ActiveClass(props.active, o.name) } tx-11" >
+                    <font-awesome icon="menu-item-icon icon tx-20 {o.icon}"></font-awesome>
+                    <span class="menu-item-label tx-10">{ o.title }</span>
+                </a>
+                <ul if="{ o.childs }" id="{o.name}" class="br-menu-sub">
+                    <li class="sub-item">
+                        <a href="{setLink(ch.link,{})}" class="sub-link" style="font-size: 9px !important;"  each="{ch in o.childs}">
+                            {ch.title}
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <script>
+        import controller from './menu-app'
+        export default controller
+    </script>
+</menuapp>

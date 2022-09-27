@@ -1,0 +1,9 @@
+<dropdown-http-scheme>
+    <select name="dropdown-http-scheme" id="{ props.elId || dropdownId }" class="{ props.elClass }" onchange="{ getValue }">
+        <option value="{ v.id }" each="{ v in state.items }" selected="{ v.selected }">{ v.title }</option>
+    </select>
+    <script>
+        import controller from './dropdown-http-scheme'
+        export default controller
+    </script>
+</dropdown-http-scheme>

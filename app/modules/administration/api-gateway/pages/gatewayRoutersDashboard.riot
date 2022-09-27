@@ -1,0 +1,23 @@
+<gateway-routers-dashboard>
+    <div class="br-mainpanel">
+        <div class="br-pageheader">
+            <nav class="breadcrumb pd-0 mg-0 tx-12">
+                <span class="breadcrumb-item">Administration</span>
+                <span class="breadcrumb-item">API Gateway</span>
+                <span class="breadcrumb-item">Routers</span>
+                <span class="breadcrumb-item active">Information</span>
+            </nav>
+        </div>
+        <div class="br-pagebody pd-r-5 pd-l-5 mg-t-10">
+            <div class="br-section-wrapper pd-x-10 pd-sm-x-30 pd-t-20">
+                <gateway-router-dashboard-filter data-state="{ state }" change-state="{ updateState }"/>
+                <gateway-router-dashboard-table data-state="{ state }" change-state="{ updateState }"/>
+            </div>
+        </div>
+    </div>
+    <gateway-router-dashboard-add-new-modal data-state="{ state }" change-state="{ updateState }"/>
+    <script>
+        import controller from './gatewayRoutersDashboard'
+        export default controller
+    </script>
+</gateway-routers-dashboard>

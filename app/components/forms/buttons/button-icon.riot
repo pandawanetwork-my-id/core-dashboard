@@ -1,0 +1,50 @@
+<!-- 
+    props:
+     - elClass
+     - elPopoverTitle
+     - elLeftIcon
+     - elRightIcon
+     - elLeftIconClass
+     - elRightIconClass
+     - title
+     - elData
+     - callback
+ -->
+
+<form-button-icon>
+    <button class="{ props.elClass || 'btn' }" onclick="{ callback }" id="{ buttonId }" data-toggle="popover" data-content="{ props.elPopoverTitle }" disabled="{ props.elDisabled }">
+        <font-awesome if="{ props.elLeftIcon }" icon="{ props.elLeftIcon }" el-class="{ props.elLeftIconClass }"/>
+        <span if="{ props.title }">{ props.title }</span>
+        <font-awesome if="{ props.elRightIcon }" icon="{ props.elRightIcon }" el-class="{ props.elRightIconClass }"/>
+    </button>
+    <style></style>
+    <script>
+        import $ from 'jquery'
+        import 'bootstrap/js/dist/popover'
+        import { randomString, showAlertError, debugLog } from 'helpers/utilities'
+        export default {
+            buttonId: randomString(5, {onlyChars: true}),
+            onMounted(props) {
+                debugLog(`[${this.name}] [MOUNTED]`)
+                if (typeof props.callback !== 'function') {
+                    showAlertError(new Error('[Form Button Icon] Callback Should Be a Function'))
+                }
+                const selector = $('[data-toggle="popover"]')
+                $(document).ready(function () {
+                    if (selector) selector.popover({trigger: 'hover', placement: 'bottom', customClass: 'tx-10'})
+                })
+            },
+            onBeforeUnmount() {
+                $('[data-toggle="popover"]').popover('hide')
+            },
+            callback() {
+                if (typeof this.props.callback === 'function')
+                    this.props.callback({
+                        id: this.buttonId,
+                        title: this.props.title,
+                        data: this.props.elData || {}
+                    })
+            }
+        }
+    </script>
+</form-button-icon>

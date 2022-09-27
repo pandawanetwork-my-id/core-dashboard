@@ -1,0 +1,12 @@
+<dropdown-clients>
+    <div class="form-inline">
+        <div class="form-group mb-2 pd-5" each="{ v in state.items }">
+            <input type="checkbox" name="{ v.name }" id="{ v.id }" class="mg-r-2" onclick="{ updateSelectedItem }" disabled="{ v.disabled }">
+            { v.title }
+        </div>
+    </div>
+    <script>
+        import controller from './select-middlewares'
+        export default controller
+    </script>
+</dropdown-clients>

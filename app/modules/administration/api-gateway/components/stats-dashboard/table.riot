@@ -1,0 +1,42 @@
+<gateway-stats-dashboard-table>
+    <div class="row">
+        <div class="col-12 pd-t-0 mg-t-20 pd-x-0">
+            <table class="table table-bordered table-hover table-striped mg-l-0 bd" id="{ table.id }">
+                <thead>
+                    <tr class="tx-12">
+                        <td class="">#</td>
+                        <td class="text-center tx-bold tx-11">Client</td>
+                        <td class="text-center tx-bold tx-11">Http Scheme</td>
+                        <td class="text-center tx-bold tx-11">Domain</td>
+                        <td class="text-center tx-bold tx-11">API Key</td>
+                        <td class="text-center tx-bold tx-11">Status</td>
+                        <td class="text-center tx-bold tx-11">Middlewares</td>
+                        <td class="text-center tx-bold tx-11">Actions</td>
+                    </tr>
+                </thead>
+                <tbody class="tx-11">
+                    <tr if="{ table.loadingdata }">
+                        <td colspan="8" class="text-center">Loading Data...</td>
+                    </tr>
+                    <tr if="{ !table.loadingdata }" each="{ item in table.items }">
+                        <td class="tx-11">{ item.n }</td>
+                        <td class="tx-11">{ item.clientId }</td>
+                        <td class="tx-11">{ item.scheme }</td>
+                        <td class="tx-11">{ item.domain }</td>
+                        <td class="tx-11">{ item.apiKey }</td>
+                        <td class="tx-11">{ item.routeStatus }</td>
+                        <td class="tx-11">{ item.middlewares }</td>
+                        <td class="tx-11">{ '-' }</td>
+                    </tr>
+                    <tr if="{ !table.loadingdata && table.isNoData }">
+                        <td colspan="8" class="text-center tx-11">No Data Found</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script>
+        import controller from './table'
+        export default controller
+    </script>
+</gateway-stats-dashboard-table>

@@ -1,0 +1,50 @@
+<gateway-router-dashboard-table>
+    <div class="row">
+        <div class="col-12 pd-t-0 mg-t-20 pd-x-0">
+            <table class="table table-bordered table-hover table-striped mg-l-0 bd" id="{ tableId }">
+                <thead>
+                    <tr class="tx-12">
+                        <td class="">#</td>
+                        <td class="tx-bold tx-11">Client</td>
+                        <td class="text-left tx-bold tx-11">Http Scheme</td>
+                        <td class="text-left tx-bold tx-11">Domain</td>
+                        <td class="text-left tx-bold tx-11">API Key</td>
+                        <td class=" tx-bold tx-11">Status</td>
+                        <td class="text-left tx-bold tx-11">Middlewares</td>
+                        <td class="text-left tx-bold tx-11">Actions</td>
+                    </tr>
+                </thead>
+                <tbody class="tx-11">
+                    <tr if="{ state.loadingdata }">
+                        <td colspan="8" class="">Loading Data...</td>
+                    </tr>
+                    <tr if="{ !state.loadingdata }" each="{ item in state.items }">
+                        <td class="tx-11">{ item.n }</td>
+                        <td class="tx-11">{ item.clientId }</td>
+                        <td class="tx-11">
+                            <span if="{ item.httpScheme.toLowerCase() === 'http' }" title="Not Secure Protocol" class="badge badge-warning tx-11 text-white">{ item.httpScheme }</span>
+                            <span if="{ item.httpScheme.toLowerCase() === 'https' }" title="Secure Protocol" class="badge badge-success tx-11">{ item.httpScheme }</span>
+                        </td>
+                        <td class="tx-11">{ item.domain }</td>
+                        <td class="tx-11">{ item.apiKey }</td>
+                        <td class="tx-11">{ item.routeStatus }</td>
+                        <td class="tx-11">{ item.middlewares && item.middlewares.length > 0 ? item.middlewares.join(',') : '-' }</td>
+                        <td class="tx-11">
+                            <div class="btn-group" role="group" aria-label="Basic example">
+                                <form-button-icon el-class="btn btn-warning tx-10 pd-2 pd-x-5 mg-1" el-popover-title="Edit" el-left-icon="fa-solid fa-pen" el-data="{ item }" callback="{console.log}"/>
+                                <form-button-icon el-class="btn btn-danger tx-10 pd-2 pd-x-5 mg-1" el-popover-title="Trash" el-left-icon="fa-solid fa-trash" el-data="{ item }" callback="{ trashRoute }"/>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr if="{ !state.loadingdata && state.isNoData }">
+                        <td colspan="8" class="text-center tx-11">No Data Found</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script>
+        import controller from './table'
+        export default controller
+    </script>
+</gateway-router-dashboard-table>

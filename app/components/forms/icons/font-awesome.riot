@@ -1,0 +1,22 @@
+<font-awesome>
+    <i class="{ icon + ' ' + (props.elClass || '') }"></i>
+    <script>
+        import './kits/ivo-gateway'
+        import { logInfo } from 'helpers/utilities'
+        // import { library, icon } from '@fortawesome/fontawesome-svg-core'
+        // import * as solidIcons from '@fortawesome/free-solid-svg-icons'
+
+        export default {
+            onBeforeMount(props) {
+                // library.add(solidIcons)
+                if (!props.icon) return logInfo('No Props "icon" detected')
+                this.icon = props.icon
+            },
+            onMounted() {
+                // this.camera = icon({ prefix: 'fas', iconName: 'camera' })
+                // console.log(solidIcons)
+                // this.update()
+            }
+        }
+    </script>
+</font-awesome>

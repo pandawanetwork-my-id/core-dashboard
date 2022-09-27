@@ -1,0 +1,13 @@
+<dropdown-clients>
+    <form-select-two-js
+        el-class="{ props.elClass }"
+        multiple="{ false }"
+        list="{ state.items }"
+        selected=""
+        select2-options="{ options }"
+        callback="{ callbackSelect2 }"/>
+    <script>
+        import controller from './dropdown-clients'
+        export default controller
+    </script>
+</dropdown-clients>

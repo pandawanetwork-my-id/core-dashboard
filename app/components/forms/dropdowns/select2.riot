@@ -1,0 +1,47 @@
+<!-- 
+    props:
+    - el-class [String] default "form-control" OPTIONAL
+    - multiple [Boolean] default TRUE OPTIONAL
+    - selected [String] default NULL OPTIONAL
+    - items [Array{Object({name, title})}]
+ -->
+<select2-js>
+    <select class="{ props.elClass || 'form-control' }" id="{ config.selectorId }" multiple="{ props.multiple }">
+        <option each="{ list in props.list }" value="{ list.name }" selected="{ props.selected === list.name ? 'true' : '' }">{ list.title }</option>
+    </select>
+    <script>
+        import $ from 'jquery'
+        import 'select2/dist/js/select2.min'
+        import 'select2/dist/css/select2.min.css'
+        import 'theme/select2-bootstrap4/select2-bootstrap4.css'
+        import {
+            cancelAllRequest,
+        } from 'services/SDK/main'
+        import { showAlertError, randomString, debugLog } from 'helpers/utilities'
+        export default {
+            onBeforeMount(props) {
+                this.config = {}
+                this.config.loading = false
+                this.config.selectorId = randomString(10, { onlyChars: true })
+            },
+            onMounted(props) {
+                debugLog(`[${this.name}] [MOUNTED]`)
+                this.init({...this.props.select2Options, theme: 'bootstrap4', dropdownCssClass: 'tx-11'})
+            },
+            onBeforeUpdate(props) {},
+            onUpdated(props) {},
+            onBeforeUnmount(props) {
+                cancelAllRequest()
+            },
+            init(opt={}) {
+                const id = '#' + this.config.selectorId
+                $(id).select2(opt)
+                $(id).on('change.select2', this.updateSelected)
+            },
+            updateSelected(e) {
+                const selected = e.target.value
+                this.props.callback(selected)
+            }
+        }
+    </script>
+</select2-js>

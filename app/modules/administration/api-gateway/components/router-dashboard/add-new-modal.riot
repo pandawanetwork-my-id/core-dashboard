@@ -1,0 +1,63 @@
+<add-new-modal>
+    <div id="{ ids.modal }" class="modal fade" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content tx-size-sm">
+                <div class="modal-header pd-x-20">
+                    <h6 class="tx-16 mg-b-0 tx-uppercase tx-inverse">
+                        Add New Routes
+                    </h6>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body pd-l-20 pd-r-20 pd-b-20 pd-t-0">
+                    <form id="{ ids.form }">
+                        <div class="row row-sm mg-t-20">
+                            <div class="col-12 tx-11 pd-t-10">
+                                Client Id<br/>
+                                <dropdown-clients el-class="form-control tx-11 w-100" name="form_clientId" selected="{ state.form_clientId }" callback="{ updatePayload }"/>
+                            </div>
+                            <div class="col-12 tx-11 pd-t-10">
+                                HTTP Scheme<br/>
+                                <dropdown-http-scheme el-class="form-control tx-11" name="form_httpScheme" selected="{ state.form_httpScheme }" callback="{ updatePayload }"/>
+                            </div>
+                            <div class="col-12 tx-11 pd-t-10">
+                                Domain Destination<br/>
+                                <input class="form-control tx-11" type="text" name="form_domain" id="{ids.domain}" value="{ state.form_domain }">
+                            </div>
+                            <div class="col-12 tx-11 pd-t-10">
+                                Middlewares<br/>
+                                <select-middlewares el-class="form-control tx-11" name="form_middlewares" selected="{ state.form_middlewares }" callback="{ updatePayload }"/>
+                            </div>
+                            <div class="col-12 tx-11 pd-t-10">
+                                API Key<br/>
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control tx-11" name="form_apiKey" el-id="{ids.apiKey}" value="{ state.form_apiKey }">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-warning tx-11" type="button" id="button-addon2" onclick="{ generateRandomAPIKey }">Generate</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div><!-- modal-body -->
+                <div class="modal-footer wrap">
+                    <div class="row">
+                        <div class="col-12">
+                            <button class="btn btn-secondary mg-r-20 tx-11 pendingModal" data-dismiss="modal">Cancel</button>
+                            <button onclick="{ submitForm }" disabled="{ state.isprocessing  ? 'true' : ''}" class="btn btn-primary tx-11">
+                                <span if="{ !state.isprocessing }">Save</span>
+                                <span if="{ state.isprocessing }" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                <span if="{ state.isprocessing }">Saving...</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!-- modal-dialog -->
+    </div>
+    <script>
+        import controller from './add-new-modal'
+        export default controller
+    </script>
+</add-new-modal>
