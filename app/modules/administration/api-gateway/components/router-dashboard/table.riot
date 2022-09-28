@@ -27,7 +27,10 @@
                         </td>
                         <td class="tx-11">{ item.domain }</td>
                         <td class="tx-11">{ item.apiKey }</td>
-                        <td class="tx-11">{ item.routeStatus }</td>
+                        <td class="tx-11">
+                            <span if="{ item.routeStatus.toLowerCase() === 'inactive' }" class="badge badge-warning tx-11 text-white">{ item.routeStatus }</span>
+                            <span if="{ item.routeStatus.toLowerCase() === 'active' }" class="badge badge-success tx-11">{ item.routeStatus }</span>
+                        </td>
                         <td class="tx-11">{ item.middlewares && item.middlewares.length > 0 ? item.middlewares.join(',') : '-' }</td>
                         <td class="tx-11">
                             <div class="btn-group" role="group" aria-label="Basic example">

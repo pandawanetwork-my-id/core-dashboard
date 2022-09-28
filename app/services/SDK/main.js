@@ -120,7 +120,7 @@ export class Request {
     }
       
     get(path, query, opt={}) {
-        logInfo('[GET]', path)
+        logInfo('[REQUEST][GET]', path)
         let {signalKey, signal} = initiateAbortController()
         return new Promise((resolve, reject) => {
                 this.service
@@ -180,7 +180,7 @@ export class Request {
     }
     
     post(path, payload, opt={}) {
-        logInfo('[POST]', path)
+        logInfo('[REQUEST][POST]', path)
         let {signalKey, signal} = initiateAbortController()
         return new Promise((resolve, reject) => {
                 const options = {
@@ -202,7 +202,7 @@ export class Request {
     }
     
     upload(path, payload, opt={}) {
-        logInfo('[POST]', path)
+        logInfo('[REQUEST][POST]', path)
         const form = new FormData()
         form.append('file', payload.file)
         let {signalKey, signal} = initiateAbortController()

@@ -21,11 +21,11 @@
     <script>
         import $ from 'jquery'
         import 'bootstrap/js/dist/popover'
-        import { randomString, showAlertError, debugLog } from 'helpers/utilities'
+        import { randomString, showAlertError, logInfo } from 'helpers/utilities'
         export default {
             buttonId: randomString(5, {onlyChars: true}),
             onMounted(props) {
-                debugLog(`[${this.name}] [MOUNTED]`)
+                logInfo(`[EVENTS][MOUNTED][${this.name}]`)
                 if (typeof props.callback !== 'function') {
                     showAlertError(new Error('[Form Button Icon] Callback Should Be a Function'))
                 }

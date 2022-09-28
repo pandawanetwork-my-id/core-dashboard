@@ -49,7 +49,7 @@ export default {
     },
     toggleSettings({ name }) {
         const collapsedParents = this.parentMenus.filter(x => x !== name)
-        console.log({collapsedParents})
+        // console.log({collapsedParents})
         for (const p of collapsedParents) {
             removeClass(document.getElementById(p), 'd-block')
         }

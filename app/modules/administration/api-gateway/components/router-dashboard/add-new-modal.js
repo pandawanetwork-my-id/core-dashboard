@@ -7,13 +7,9 @@ import { validateNewRouter } from 'helpers/validation'
 export default {
     state: {
         isprocessing: false,
-        form_clientId: null,
-        form_httpScheme: 'https',
-        form_domain: null,
-        form_middlewares: [],
-        form_apiKey: null,
         need_reload: false
     },
+    forms: {},
     ids: {
         form: randomString(10, {onlyChars: true}),
         clientId: randomString(10, {onlyChars: true}),
@@ -26,6 +22,7 @@ export default {
     components,
     onBeforeMount() {},
     onMounted() {
+        this.resetForms()
     },
     onBeforeUpdate(props, state) {
         this.state = {...state, ...props.dataState}
@@ -40,18 +37,15 @@ export default {
     showModal() {
         const modal = showModal(this.state.modal_id)
         modal.on('hide.bs.modal', () => {
-            this.props.changeState(this.name, {...this.state, 'modal_show': false})
             this.$('#'+ this.ids.form).reset()
+            this.props.changeState(this.name, {'modal_show': false, table_loadingdata: false})
         })
     },
     submitForm() {
         try {
             let data = {}
-            for (const k in this.state) {
-                if (k.indexOf('form_') > -1) {
-                    const field = k.replace('form_', '')
-                    data[field] = this.state[k]
-                }
+            for (const k in this.forms) {
+                data[k] = this.forms[k]
             }
             data['domain'] = this.$('#' + this.ids.domain).value
             data['middlewares'] = data.middlewares.join(',')
@@ -69,6 +63,7 @@ export default {
                         ActivateRoutes({clientIds: res.data.clientId})
                             .then(() => {
                                 showToastSuccess('New Route Deployed', {width: 300})
+                                this.props.changeState(this.name, {'modal_show': false, table_loadingdata: true})
                             })
                         return true
                     }
@@ -76,6 +71,15 @@ export default {
                 })
         } catch (err) {
             showAlertError(err)
+        }
+    },
+    resetForms() {
+        this.forms = {
+            clientId: null,
+            httpScheme: 'https',
+            domain: null,
+            middlewares: [],
+            apiKey: null,
         }
     },
     updatePayload(key, value) {

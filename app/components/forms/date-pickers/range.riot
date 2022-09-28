@@ -22,7 +22,7 @@
         <input if="{dateType === 'range'}" disabled="{ props.disabled }" type="text" id="{ inputId }" class="form-control {props.elClass}" value="{ defaultValue.join(' - ') }">
     </div>
     <script>
-        import { randomString, showAlertError, debugLog } from 'helpers/utilities'
+        import { randomString, showAlertError, logInfo } from 'helpers/utilities'
         import cloneDeep from 'lodash.clonedeep'
         import set from 'lodash.set'
         import moment from 'moment'
@@ -64,7 +64,7 @@
                 this.defaultValue = [moment(since).format(this.defaultFormat), moment(until).format(this.defaultFormat)]
             },
             onMounted(props) {
-                debugLog(`[${this.name}] [MOUNTED]`)
+                logInfo(`[EVENTS][MOUNTED][${this.name}]`)
                 if (typeof props.callback !== 'function') {
                     showAlertError(new Error('[Date Range Picker] Callback Should Be a Function'))
                 }

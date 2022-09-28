@@ -28,7 +28,7 @@
         }
     </style>
     <script>
-        import { randomString, showAlertError, debugLog } from 'helpers/utilities'
+        import { randomString, showAlertError, logInfo } from 'helpers/utilities'
         import cloneDeep from 'lodash.clonedeep'
 
         export default {
@@ -37,7 +37,7 @@
                 this.currentClass = randomString(10, {onlyChars: true})
             },
             onMounted(props) {
-                debugLog(`[${this.name}] [MOUNTED]`)
+                logInfo(`[EVENTS][MOUNTED][${this.name}]`)
                 if (typeof props.callback !== 'function') showAlertError(new Error('[Filter] Callback Is Required'))
                 if (props.dataSelected) this.itemSelected = props.dataSelected
             },

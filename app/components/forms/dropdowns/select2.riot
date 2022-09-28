@@ -13,11 +13,11 @@
         import $ from 'jquery'
         import 'select2/dist/js/select2.min'
         import 'select2/dist/css/select2.min.css'
-        import 'theme/select2-bootstrap4/select2-bootstrap4.css'
+        import 'theme/vendors/select2-bootstrap4/select2-bootstrap4.css'
         import {
             cancelAllRequest,
         } from 'services/SDK/main'
-        import { showAlertError, randomString, debugLog } from 'helpers/utilities'
+        import { showAlertError, randomString, logInfo } from 'helpers/utilities'
         export default {
             onBeforeMount(props) {
                 this.config = {}
@@ -25,7 +25,7 @@
                 this.config.selectorId = randomString(10, { onlyChars: true })
             },
             onMounted(props) {
-                debugLog(`[${this.name}] [MOUNTED]`)
+                logInfo(`[EVENTS][MOUNTED][${this.name}]`)
                 this.init({...this.props.select2Options, theme: 'bootstrap4', dropdownCssClass: 'tx-11'})
             },
             onBeforeUpdate(props) {},

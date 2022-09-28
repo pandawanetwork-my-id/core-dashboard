@@ -1,8 +1,11 @@
 <font-awesome>
-    <i class="{ icon + ' ' + (props.elClass || '') }"></i>
+    <i class="{ props.icon + ' ' + (props.elClass || '') }"></i>
+    <!-- <object data="{icon}" class="{elClass}" alt=""></object> -->
     <script>
-        import './kits/ivo-gateway'
-        import { logInfo } from 'helpers/utilities'
+        // import './kits/ivo-gateway'
+        import 'theme/vendors/font-awesome-6.2.0/css/fontawesome.css'
+        import 'theme/vendors/font-awesome-6.2.0/css/solid.min.css'
+        import { logInfo, showToastError } from 'helpers/utilities'
         // import { library, icon } from '@fortawesome/fontawesome-svg-core'
         // import * as solidIcons from '@fortawesome/free-solid-svg-icons'
 
@@ -10,7 +13,6 @@
             onBeforeMount(props) {
                 // library.add(solidIcons)
                 if (!props.icon) return logInfo('No Props "icon" detected')
-                this.icon = props.icon
             },
             onMounted() {
                 // this.camera = icon({ prefix: 'fas', iconName: 'camera' })

@@ -11,7 +11,7 @@ export default {
         this.getItems()
     },
     onBeforeUpdate() {
-        console.log(this.state)
+        // console.log(this.state)
     },
     onBeforeUnmount() {},
     onUnmounted() {},

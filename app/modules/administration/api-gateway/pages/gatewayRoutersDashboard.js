@@ -1,5 +1,7 @@
 import components from '../components/router-dashboard/index'
 import globalComponents from '../components/globals/api-gateway-global-components'
+import { logInfo } from 'helpers/utilities'
+
 
 export default {
     state: {
@@ -31,7 +33,7 @@ export default {
     },
     // call from add-new-data
     updateState(from, data) {
-        console.log('Change state from: ', from, data)
+        logInfo('Change state from: ', from, data)
         this.update(data)
     },
 }

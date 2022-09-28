@@ -22,7 +22,7 @@
         }
     </style>
     <script>
-        import { randomString, showAlertError, debugLog } from 'helpers/utilities'
+        import { randomString, showAlertError, logInfo } from 'helpers/utilities'
         export default {
             elId: randomString(10, {onlyChars: true}),
             callbackData: {},
@@ -35,7 +35,7 @@
                 }
             },
             onMounted(props) {
-                debugLog(`[${this.name}] [MOUNTED]`)
+                logInfo(`[EVENTS][MOUNTED][${this.name}]`)
                 const selector = $('[data-toggle="popover"]')
                 $(document).ready(function () {
                     selector.popover({trigger: 'hover', customClass: 'tx-10'})

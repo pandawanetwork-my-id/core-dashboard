@@ -2,7 +2,7 @@ import $ from 'jquery'
 import 'bootstrap/js/dist/tooltip'
 import { goTo } from 'helpers/ma'
 import { getStorage } from 'helpers/storage'
-import { debugLog } from 'helpers/utilities'
+import { logInfo } from 'helpers/utilities'
 import AppLogo from 'theme/images/logo.png'
 import UserLogo from 'theme/images/profile.png'
 
@@ -32,7 +32,7 @@ export default {
     goTo(link) {
         this.state.profileMenu.isActive = false
         this.update()
-        debugLog(link)
+        logInfo(link)
         goTo(link)
     },
     onMounted(){

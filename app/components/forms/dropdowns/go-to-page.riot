@@ -3,7 +3,7 @@
         <option each="{val in values}" value="{val}" selected="{val === props.selectedValue}">{val}</option>
     </select>
     <script>
-        import { randomString, showAlertError, debugLog } from 'helpers/utilities'
+        import { randomString, showAlertError, logInfo } from 'helpers/utilities'
 
         export default {
             values: [ 1 ],
@@ -16,7 +16,7 @@
                 this.randomID = randomString(10, {onlyChars: true})
             },
             onMounted(props) {
-                debugLog(`[${this.name}] [MOUNTED]`)
+                logInfo(`[EVENTS][MOUNTED][${this.name}]`)
             },
             onBeforeUpdate(props) {
                 if (props.customClass) this.customClass = props.customClass

@@ -26,7 +26,7 @@
         </div>
     </div>
     <script>
-        import { randomString, showAlertError, debugLog } from 'helpers/utilities'
+        import { randomString, showAlertError, logInfo } from 'helpers/utilities'
         import cloneDeep from 'lodash.clonedeep'
         import set from 'lodash.set'
         import moment from 'moment'
@@ -59,7 +59,7 @@
                 }
             },
             onMounted(props) {
-                debugLog(`[${this.name}] [MOUNTED]`)
+                logInfo(`[EVENTS][MOUNTED][${this.name}]`)
                 if (typeof props.callback !== 'function') {
                     showAlertError(new Error('[Date Single Picker] Callback Should Be a Function'))
                 }

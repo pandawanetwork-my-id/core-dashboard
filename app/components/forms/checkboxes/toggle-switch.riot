@@ -81,7 +81,7 @@
         }
     </style>
     <script>
-        import { randomString, debugLog } from 'helpers/utilities'
+        import { randomString, logInfo } from 'helpers/utilities'
         export default {
             toggleId: randomString(5, {onlyChars: true}),
             config: {
@@ -95,7 +95,7 @@
                 this.init(props)
             },
             onMounted(props) {
-                debugLog(`[${this.name}] [MOUNTED]`)
+                logInfo(`[EVENTS][MOUNTED][${this.name}]`)
                 if (typeof props.callback !== 'function') {
                     showAlertError(new Error('[Form Toggle Switch] Callback Should Be a Function'))
                 }

@@ -3,7 +3,7 @@
         <option each="{val in values}" value="{val}">{val}</option>
     </select>
     <script>
-        import { randomString, showAlertError, debugLog } from 'helpers/utilities'
+        import { randomString, showAlertError, logInfo } from 'helpers/utilities'
 
         export default {
             values: [10, 20, 50, 100],
@@ -14,7 +14,7 @@
                 this.randomID = randomString(10, {onlyChars: true})
             },
             onMounted() {
-                debugLog(`[${this.name}] [MOUNTED]`)
+                logInfo(`[EVENTS][MOUNTED][${this.name}]`)
             },
             onUpdated(props) {
                 if (props.values) {

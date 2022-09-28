@@ -1,12 +1,15 @@
 import { randomString } from 'helpers/utilities'
+import components from '../globals/api-gateway-global-components'
 
 export default {
+    components,
     state: {
         'table_loadingdata': false,
-        // filters
-        'filterdata_client': null,
-        'filterdata_domain': null,
-        'filterdata_status': null
+    },
+    payload: {
+        clientId: '',
+        status: 1,
+        domain: ''
     },
     ids: {
         client: randomString(10, {onlyChars: true}),
@@ -54,4 +57,7 @@ export default {
             ...newState
         })
     },
+    updatePayload(key, value) {
+        console.log(key, value)
+    }
 }

@@ -6,7 +6,7 @@ export const changeStorage = (data, prefix) => {
         const value = data[key]
         const fullKey = `${prefix}${key}`
         localStorage.setItem(fullKey, value)
-        logInfo(`[STORAGE] setting ${fullKey}`)
+        logInfo(`[ACTIONS][STORAGE]setting ${fullKey}`)
     }
 }
 export const getStorage = (key, prefix, defaultValue) => {
@@ -14,7 +14,7 @@ export const getStorage = (key, prefix, defaultValue) => {
     else prefix = ''
     const fullKey = `${prefix}${key}`
     const v = localStorage.getItem(fullKey)
-    logInfo(`[STORAGE] getting ${fullKey}`)
+    logInfo(`[ACTIONS][STORAGE]getting ${fullKey}`)
     return v || defaultValue
 }
 

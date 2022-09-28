@@ -34,7 +34,7 @@
         </li>
     </ul>
     <script>
-        import { debugLog } from 'helpers/utilities'
+        import { logInfo } from 'helpers/utilities'
         export default {
             info: {
                 currentPage: 1
@@ -48,7 +48,7 @@
                 if(props.currentPage) this.info.currentPage = parseInt(props.currentPage)
             },
             onMounted() {
-                debugLog(`[${this.name}] [MOUNTED]`)
+                logInfo(`[EVENTS][MOUNTED][${this.name}]`)
             },
             onBeforeUpdate(props) {
                 if(props.currentPage) this.info.currentPage = parseInt(props.currentPage)

@@ -40,7 +40,7 @@ export default {
                     }),
                     isNoData
                 }
-                console.log(data)
+                // console.log(data)
                 this.update(data)
             })
     },
@@ -57,7 +57,7 @@ export default {
                     if (!res) return null
                     showToastSuccess('Route Removed')
                     DeactivateRoutes({
-                        clientIds: res.data.clientId
+                        clientIds: clientId
                     })
                         .catch(errDeactivate => {
                             showToastError(errDeactivate.message)
