@@ -1,5 +1,5 @@
 import 'bootstrap/js/dist/modal'
-import { randomString, showModal, hideModal, showAlertError, showToastSuccess } from 'helpers/utilities'
+import { randomString, showModal, hideModal, showAlertError, showToastSuccess, logInfo } from 'helpers/utilities'
 import components from '../globals/api-gateway-global-components'
 import { CreateRoutes, ActivateRoutes } from '../../api-gateway.sdk'
 import { validateNewRouter } from 'helpers/validation'
@@ -83,12 +83,12 @@ export default {
         }
     },
     updatePayload(key, value) {
-        this.update({
-            [key]: value
-        })
+        this.forms[key] = value
+        logInfo(`form payload ${key} updated to ${value}`)
     },
     generateRandomAPIKey () {
         const randomKey = crypto.randomUUID().toUpperCase()
-        this.updatePayload('form_apiKey', randomKey)
+        this.updatePayload('apiKey', randomKey)
+        this.update()
     }
 }

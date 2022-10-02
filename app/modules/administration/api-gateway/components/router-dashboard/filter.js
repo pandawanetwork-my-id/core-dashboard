@@ -1,4 +1,4 @@
-import { randomString } from 'helpers/utilities'
+import { randomString, logInfo } from 'helpers/utilities'
 import components from '../globals/api-gateway-global-components'
 
 export default {
@@ -12,9 +12,7 @@ export default {
         domain: ''
     },
     ids: {
-        client: randomString(10, {onlyChars: true}),
         domain: randomString(10, {onlyChars: true}),
-        status: randomString(10, {onlyChars: true}),
     },
     onBeforeMount(props, state) {},
     onMounted() {},
@@ -43,21 +41,23 @@ export default {
         })
     },
     triggerFilterData() {
-        const newState = {
-            'filterdata_client': this.$('#' + this.ids.client).value,
-            'filterdata_domain': this.$('#' + this.ids.domain).value,
-            'filterdata_status': this.$('#' + this.ids.status).value,
-        }
+        this.payload['domain'] = this.$('#' + this.ids.domain).value
         this.props.changeState(this.name, {
             'table_loadingdata': true,
-            ...newState
+            filterdata_status: this.payload.status,
+            filterdata_clientId:this.payload.clientId,
+            filterdata_domain: this.payload.domain
         })
+        debugger
         this.update({
-            'table_loadingdata': true,
-            ...newState
+            'table_loadingdata': true
         })
     },
     updatePayload(key, value) {
-        console.log(key, value)
+        if (value) {
+            this.payload[key] = value
+            this.update()
+            logInfo(`${key} payload changed to ${value}`)
+        }
     }
 }

@@ -10,7 +10,12 @@
         </div>
         <div class="col-2 tx-11 pd-x-0">
             Status
-            <dropdown-gateway-status el-class="form-control tx-11" selected="{ payload.status }" callback="{ setPayload }"/>
+            <dropdown-gateway-status
+                el-class="form-control tx-11"
+                selected="{ payload.status }"
+                callback="{ updatePayload }"
+                name="status"
+                select2-options="{{dropdownCssClass: 'pd-t-40'}}"/>
         </div>
         <div class="col-3 pd-x-5">
             <form-button-loading

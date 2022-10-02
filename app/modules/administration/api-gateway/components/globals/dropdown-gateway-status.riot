@@ -1,5 +1,5 @@
 <dropdown-gateway-status>
-    <select name="{ dropdownName }" id="{ dropdownId }" class="{ props.elClass }">
+    <select name="{ props.name || dropdown.name }" id="{ dropdownId }" class="{ props.elClass }" onchange="{ callback }">
         <option value="{ item.name }" each="{ item in state.items }">{ item.title }</option>
     </select>
     <script>

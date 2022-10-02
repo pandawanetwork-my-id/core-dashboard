@@ -1,5 +1,5 @@
 
-import Raw from './Raw.riot'
+import Raw from './raw.riot'
 
 export default {
     Raw

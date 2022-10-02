@@ -14,6 +14,7 @@ export default {
     },
     onBeforeUpdate(props, localState) {
         const shareState = props.dataState
+        console.log(shareState)
         if (!localState.loadingdata && shareState.table_loadingdata) {
             this.getData(shareState)
         }
