@@ -1,6 +1,6 @@
 'use strict'
 
-import { getStorage } from 'helpers/storage'
+import { getStorage, deleteStorage } from 'helpers/storage'
 import { goTo} from 'helpers/ma'
 import result from 'lodash.result'
 import * as axios from 'axios'
@@ -84,35 +84,32 @@ export class Request {
         this.service = service
         return this
     }
-    
+
     setupTokenAvailable (config) {
         const token = getStorage('API_TOKEN')
         if (token) config.headers.Authorization = `Bearer ${token}`
         return config
     }
-    
+
     setupTokenNotAvailable (error) {
         return Promise.reject (error)
     }
-    
+
     handleSuccess(response) {
         return response.data
     }
-    
+
     handleError(error) {
         /* setup switch for custom error handler */
         let data
         const status = result(error, 'response.status', 0)
         switch (status) {
             case 401: 
-                eraseCookie('token')
-                eraseCookie('name')
-                eraseCookie('userid')
-                eraseCookie('refresh')
+                deleteStorage('API_TOKEN')
+                deleteStorage('USERNAME')
                 goTo('login')
             break
             default:
-                // goTo('error-page')
                 data = result(error, 'response.data', '')
             break
         }

@@ -50,6 +50,7 @@ export default {
             data['domain'] = this.$('#' + this.ids.domain).value
             data['middlewares'] = data.middlewares.join(',')
             validateNewRouter(data)
+            debugger
             CreateRoutes(data)
                 .catch(err => {
                     showAlertError(err)
@@ -76,7 +77,7 @@ export default {
     resetForms() {
         this.forms = {
             clientId: null,
-            httpScheme: 'https',
+            httpScheme: 'http',
             domain: null,
             middlewares: [],
             apiKey: null,

@@ -15,24 +15,24 @@
                         <div class="row row-sm mg-t-20">
                             <div class="col-12 tx-11 pd-t-10">
                                 Client Id<br/>
-                                <dropdown-clients el-class="form-control tx-11 w-100" name="clientId" selected="{ state.form_clientId }" callback="{ updatePayload }"/>
+                                <dropdown-clients el-class="form-control tx-11 w-100" name="clientId" selected="{ forms.clientId }" callback="{ updatePayload }"/>
                             </div>
                             <div class="col-12 tx-11 pd-t-10">
                                 HTTP Scheme<br/>
-                                <dropdown-http-scheme el-class="form-control tx-11" name="form_httpScheme" selected="{ state.form_httpScheme }" callback="{ updatePayload }"/>
+                                <dropdown-http-scheme el-class="form-control tx-11" name="httpScheme" selected="{ forms.httpScheme }" callback="{ updatePayload }"/>
                             </div>
                             <div class="col-12 tx-11 pd-t-10">
                                 Domain Destination<br/>
-                                <input class="form-control tx-11" type="text" name="form_domain" id="{ids.domain}" value="{ state.form_domain }">
+                                <input class="form-control tx-11" type="text" name="domain" id="{ids.domain}" value="{ forms.domain }">
                             </div>
                             <div class="col-12 tx-11 pd-t-10">
                                 Middlewares<br/>
-                                <select-middlewares el-class="form-control tx-11" name="form_middlewares" selected="{ state.form_middlewares }" callback="{ updatePayload }"/>
+                                <select-middlewares el-class="form-control tx-11" name="middlewares" selected="{ forms.middlewares }" callback="{ updatePayload }"/>
                             </div>
                             <div class="col-12 tx-11 pd-t-10">
                                 API Key<br/>
                                 <div class="input-group mb-3">
-                                    <input type="text" class="form-control tx-11" name="form_apiKey" el-id="{ids.apiKey}" value="{ forms.apiKey }">
+                                    <input type="text" class="form-control tx-11" name="apiKey" el-id="{ids.apiKey}" value="{ forms.apiKey }">
                                     <div class="input-group-append">
                                         <button class="btn btn-warning tx-11" type="button" id="button-addon2" onclick="{ generateRandomAPIKey }">Generate</button>
                                     </div>
