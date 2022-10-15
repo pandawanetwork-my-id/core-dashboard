@@ -1,11 +1,20 @@
 import { randomString, showAlertError, showToastSuccess, showToastError, showConfirmation } from 'helpers/utilities'
-import { GetRoutes, TrashRoute, DeactivateRoutes } from '../../api-gateway.sdk'
+import { GetRoutes, TrashRoute, DeactivateRoute, ReactivateRoute, ActivateRoute } from '../../api-gateway.sdk'
 
 export default {
     state: {
         items: [],
         loadingdata: false,
-        isNoData: true
+        isNoData: true,
+        edit: {
+            modal_show: false,
+            data: {}
+        }
+    },
+    badgeStatus: {
+        '0': 'warning',
+        '-1': 'danger',
+        '1': 'success'
     },
     tableId: randomString(10, {onlyChars: true}),
     onBeforeMount() {},
@@ -57,6 +66,52 @@ export default {
                 .then(res => {
                     if (!res) return null
                     showToastSuccess('Route Removed')
+                    this.getData(this.state)
+                })
+        })
+    },
+    activateRoute(e) {
+        const { _id, clientId } = e.data
+        showConfirmation('Atcivate This Client Route "'+ clientId +'"?', {width: '300px'}).then((res) => {
+            if (!res.isConfirmed) return null
+            ActivateRoute({ dataId: _id })
+                .catch(err => {
+                    showAlertError(err)
+                    return null
+                })
+                .then(res => {
+                    if (!res) return null
+                    showToastSuccess('Route Removed')
+                })
+        })
+    },
+    deactivateRoute(e) {
+        const { _id, clientId } = e.data
+        showConfirmation('Deatcivate This Client Route "'+ clientId +'"?', {width: '300px'}).then((res) => {
+            if (!res.isConfirmed) return null
+            DeactivateRoute({ dataId: _id })
+                .catch(err => {
+                    showAlertError(err)
+                    return null
+                })
+                .then(res => {
+                    if (!res) return null
+                    showToastSuccess('Route Removed')
+                })
+        })
+    },
+    reactivateRoute(e) {
+        const { _id, clientId } = e.data
+        showConfirmation('Re-Activate This Client Route "'+ clientId +'"?', {width: '300px'}).then((res) => {
+            if (!res.isConfirmed) return null
+            ReactivateRoute({ dataId: _id })
+                .catch(err => {
+                    showAlertError(err)
+                    return null
+                })
+                .then(res => {
+                    if (!res) return null
+                    showToastSuccess('Route Removed')
                     DeactivateRoutes({
                         clientIds: clientId
                     })
@@ -73,4 +128,7 @@ export default {
                 })
         })
     },
+    showModalEdit(a) {
+        this.update({edit: {modal_show: true, data: a.data}})
+    }
 }

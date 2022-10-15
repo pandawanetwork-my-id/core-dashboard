@@ -22,20 +22,60 @@
                         <td class="tx-11">{ item.n }</td>
                         <td class="tx-11">{ item.clientId }</td>
                         <td class="tx-11">
-                            <span if="{ item.httpScheme.toLowerCase() === 'http' }" title="Not Secure Protocol" class="badge badge-warning tx-11 text-white">{ item.httpScheme }</span>
-                            <span if="{ item.httpScheme.toLowerCase() === 'https' }" title="Secure Protocol" class="badge badge-success tx-11">{ item.httpScheme }</span>
+                            <span
+                                if="{ item.httpScheme.toLowerCase() === 'http' }"
+                                title="Not Secure Protocol"
+                                class="badge badge-warning tx-11 text-white">
+                                { item.httpScheme }
+                            </span>
+                            <span
+                                if="{ item.httpScheme.toLowerCase() === 'https' }"
+                                title="Secure Protocol"
+                                class="badge badge-success tx-11">
+                                { item.httpScheme }
+                            </span>
                         </td>
                         <td class="tx-11">{ item.domain }</td>
                         <td class="tx-11">{ item.apiKey }</td>
                         <td class="tx-11">
-                            <span if="{ item.routeStatus.toLowerCase() === 'inactive' }" class="badge badge-warning tx-11 text-white">{ item.routeStatus }</span>
-                            <span if="{ item.routeStatus.toLowerCase() === 'active' }" class="badge badge-success tx-11">{ item.routeStatus }</span>
+                            <span
+                                class="badge badge-{ badgeStatus[item.routeStatus] } tx-11 text-white" data-item="{item.routeStatus}">
+                                { item.routeStatusText }
+                            </span>
                         </td>
-                        <td class="tx-11">{ item.middlewares && item.middlewares.length > 0 ? item.middlewares.join(',') : '-' }</td>
+                        <td class="tx-11">
+                            { item.middlewares && item.middlewares.length > 0 ? item.middlewares.join(',') : '-' }
+                        </td>
                         <td class="tx-11">
                             <div class="btn-group" role="group" aria-label="Basic example">
-                                <form-button-icon el-class="btn btn-warning tx-10 pd-2 pd-x-5 mg-1" el-popover-title="Edit" el-left-icon="fa-solid fa-pen" el-data="{ item }" callback="{console.log}"/>
-                                <form-button-icon el-class="btn btn-danger tx-10 pd-2 pd-x-5 mg-1" el-popover-title="Trash" el-left-icon="fa-solid fa-trash" el-data="{ item }" callback="{ trashRoute }"/>
+                                <form-button-icon
+                                    if="{ item.actions.indexOf('edit') > -1 }"
+                                    el-class="btn btn-primary tx-10 pd-2 pd-x-5 mg-1"
+                                    el-popover-title="Edit"
+                                    el-left-icon="fa-solid fa-pen"
+                                    el-data="{ item }"
+                                    callback="{ showModalEdit }"/>
+                                <form-button-icon
+                                    if="{ item.actions.indexOf('deactivate') > -1 }"
+                                    el-class="btn btn-warning tx-10 pd-2 pd-x-5 mg-1"
+                                    el-popover-title="Deactivate"
+                                    el-left-icon="fa-solid fa-lock"
+                                    el-data="{ item }"
+                                    callback="{ deactivateRoute }"/>
+                                <form-button-icon
+                                    if="{ item.actions.indexOf('reactivate') > -1 }"
+                                    el-class="btn btn-success tx-10 pd-2 pd-x-5 mg-1"
+                                    el-popover-title="Re-Activate"
+                                    el-left-icon="fa-solid fa-lock-open"
+                                    el-data="{ item }"
+                                    callback="{ reactivateRoute }"/>
+                                <form-button-icon
+                                    if="{ item.actions.indexOf('trash') > -1 }"
+                                    el-class="btn btn-danger tx-10 pd-2 pd-x-5 mg-1"
+                                    el-popover-title="Trash"
+                                    el-left-icon="fa-solid fa-trash"
+                                    el-data="{ item }"
+                                    callback="{ trashRoute }"/>
                             </div>
                         </td>
                     </tr>

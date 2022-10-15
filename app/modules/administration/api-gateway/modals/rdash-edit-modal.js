@@ -1,7 +1,7 @@
 import 'bootstrap/js/dist/modal'
 import { randomString, showModal, hideModal, showAlertError, showToastSuccess, logInfo } from 'helpers/utilities'
-import components from '../globals/api-gateway-global-components'
-import { CreateRoutes, ActivateRoutes } from '../../api-gateway.sdk'
+import components from '../components/globals/api-gateway-global-components'
+import { CreateRoute, ActivateRoute } from '../api-gateway.sdk'
 import { validateNewRouter } from 'helpers/validation'
 
 export default {
@@ -25,6 +25,7 @@ export default {
         this.resetForms()
     },
     onBeforeUpdate(props, state) {
+        console.log(state)
         this.state = {...state, ...props.dataState}
         this.state.modal_id = this.ids.modal
         if (this.state.modal_show) {
@@ -51,7 +52,7 @@ export default {
             data['middlewares'] = data.middlewares.join(',')
             validateNewRouter(data)
             debugger
-            CreateRoutes(data)
+            CreateRoute(data)
                 .catch(err => {
                     showAlertError(err)
                     return null
@@ -61,7 +62,7 @@ export default {
                         showToastSuccess('New Route Created', {width: 300})
                         this.update({need_reload: true})
                         hideModal(this.state.modal_id)
-                        ActivateRoutes({clientIds: res.data.clientId})
+                        ActivateRoute({clientIds: res.data.clientId})
                             .then(() => {
                                 showToastSuccess('New Route Deployed', {width: 300})
                                 this.props.changeState(this.name, {'modal_show': false, table_loadingdata: true})

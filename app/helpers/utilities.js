@@ -63,7 +63,6 @@ export const showToastSuccess = function (message, opt={}) {
         // text: message,
         position: 'top-end',
         padding: '5px',
-        timer: 3 * 1000,
         html: `<span class="tx-12">${message}</span>`,
         buttonsStyling: 'tx-10',
         timerProgressBar: true,

@@ -1,4 +1,5 @@
 import components from '../components/router-dashboard/index'
+import modals from '../modals/index'
 import globalComponents from '../components/globals/api-gateway-global-components'
 import { logInfo } from 'helpers/utilities'
 
@@ -16,6 +17,7 @@ export default {
     },
     components: {
         ...components,
+        ...modals,
         ...globalComponents,
     },
     publicParentMethod() {
